@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>GovHack</title>
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<!-- Custom CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Bootstrap and JQuery -->
+	<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+	<script src="bootstrap.min.js"></script>
+	<!-- Plotly.js -->
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+	<!-- Custom JS -->
+	<script src="js/app.js"></script>
+</head>
+<body ng-app="MyTopicList" ng-controller="myCtrl">
+	<nav class="navbar navbar-static-top navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="#">GovHack</a>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container">
+		<button ng-hide="started" class="btn btn-primary center-block" ng-click="start($scope)">Get Started</button>
+	</div>
+	<div class="container" ng-show="started">
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+				    <h3 class="panel-title">Add Topic</h3>
+				  </div>
+				  <div class="panel-content">
+						<form class="form-group" ng-submit="addTopic($scope)">
+							<input type="text" placeholder="Topic Name" class="form-control" id="inputDefault" ng-model="$scope.newTopic" autocomplete="off">
+							<br><br>
+							<div class="row">
+								<div class="col-xs-2 col-xs-offset-1">
+									<p class="text-center">Anger</p>
+									<select class="form-control" id="select" ng-model="$scope.anger">
+									  <option>1</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</div>
+								<div class="col-xs-2">
+									<p class="text-center">Disgust</p>
+									<select class="form-control" id="select" ng-model="$scope.disgust">
+									  <option>1</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</div>
+								<div class="col-xs-2">
+									<p class="text-center">Fear</p>
+									<select class="form-control" id="select" ng-model="$scope.fear">
+									  <option>1</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</div>
+								<div class="col-xs-2">
+									<p class="text-center">Joy</p>
+									<select class="form-control" id="select" ng-model="$scope.joy">
+									  <option>1</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</div>
+								<div class="col-xs-2">
+									<p class="text-center">Sadness</p>
+									<select class="form-control" id="select" ng-model="$scope.sadness">
+									  <option>1</option>
+									  <option>2</option>
+									  <option>3</option>
+									  <option>4</option>
+									  <option>5</option>
+									</select>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-default center-block">Add Topic</button>
+						</form>
+					</div>
+				</div>
+				<h1 class="text-center">Topics</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<input class="form-control" type="text" ng-model="searchTopics" placeholder="Search topics"/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6" ng-repeat="topic in topics | filter:searchTopics">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+				    <h3 class="panel-title">{{topic.name}}</h3>
+				  </div>
+					<div class="panel-content">
+						<!-- <p>Anger: {{topic.sentiment.anger}}</p>
+						<p>Disgust: {{topic.sentiment.disgust}}</p>
+						<p>Fear: {{topic.sentiment.fear}}</p>
+						<p>Joy: {{topic.sentiment.joy}}</p>
+						<p>Sadness: {{topic.sentiment.sadness}}</p> -->
+						<button type="button" class="btn btn-default center-block" ng-click="togglePlot(topic.name, topic.sentiment.anger, topic.sentiment.disgust, topic.sentiment.fear, topic.sentiment.joy, topic.sentiment.sadness)">Show Plot</button>
+						<button type="button" class="btn btn-danger center-block" ng-click="removeTopic($scope, topic.key)">Remove Topic</button>
+						<!-- Slide Down Plot -->
+						<div class="portfolio-slide-down">
+							<div class="center-block" id="{{topic.name}}"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
