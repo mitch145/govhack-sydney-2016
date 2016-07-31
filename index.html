@@ -29,7 +29,12 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="#">GovHack</a>
+	      <a class="navbar-brand" href="#">Opinion Matters</a>
+	      <ul class="nav navbar-nav">
+	        <li class="active"><a href="#">Refugees <span class="sr-only">(current)</span></a></li>
+	        <li><a href="#">Trump</a></li>
+	        <li><a href="#">Hanson</a></li>
+	      </ul>
 	    </div>
 	  </div>
 	</nav>
@@ -37,15 +42,19 @@
 		<button ng-hide="started" class="btn btn-primary center-block" ng-click="start($scope)">Get Started</button>
 	</div>
 	<div class="container" ng-show="started">
+		<div class="jumbotron">
+		  <h1>Refugees</h1>
+		  <p>View public and social media sentiment analysis on government releases related to refugees.</p>
+		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-				<div class="panel panel-primary">
+				<div ng-hide="true" class="panel panel-primary">
 					<div class="panel-heading">
 					    <h3 class="panel-title">Add Report</h3>
 					</div>
 					<div class="panel-content">
 						<form class="form-group" ng-submit="addTopic($scope)">
-							<input type="text" placeholder="Topic Name" class="form-control" id="inputDefault" ng-model="$scope.newTopic" autocomplete="off">
+							<input type="text" placeholder="Report Name" class="form-control" id="inputDefault" ng-model="$scope.newTopic" autocomplete="off">
 							<br><br>
 							<div class="row">
 								<p class="text-center">Public Sentiment</p>
@@ -232,22 +241,24 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-				<input class="form-control" type="text" ng-model="searchTopics" placeholder="Search topics"/>
+				<input class="form-control" type="text" ng-model="searchTopics" placeholder="Search reports"/>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12" ng-repeat="topic in topics | filter:searchTopics">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-				    <h3 class="panel-title">{{topic.name}}</h3>
+				    <h2 class="panel-title text-center">{{topic.name}}</h2>
 				  </div>
 					<div class="panel-content">
-						
-						<button type="button" class="btn btn-default center-block" ng-click="togglePlot(topic.name, topic.population, topic.media, topic.government)">Show Report</button>
+
+						<button class="btn btn-default center-block" href="">Report Link</button>
+						<button type="button" class="btn btn-default center-block" ng-click="togglePlot(topic.name, topic.population, topic.media, topic.government)">View Graph</button>
 						<!-- <button type="button" class="btn btn-danger center-block" ng-click="removeTopic($scope, topic.key)">Remove Topic</button> -->
 						
 						<div class="portfolio-slide-down">
 							<div class="center-block" id="{{topic.name}}"></div>
+							<button ng-show="shitsFucked" class="btn btn-default center-block" href="">View Detailed Analysis</button>
 						</div>
 					</div>
 				</div>

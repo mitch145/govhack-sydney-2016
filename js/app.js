@@ -3,6 +3,7 @@ app.controller("myCtrl", function($scope) {
 
   $scope.searchTopics = '';
   $scope.started = true;
+  $scope.shitsFucked = false;
   $scope.admin = false;
   $scope.test = "testing";
 
@@ -114,6 +115,7 @@ app.controller("myCtrl", function($scope) {
 
 
   $scope.togglePlot = function(name, population, media, government){
+    $scope.shitsFucked = true;
     console.log("population");
     console.log(population);
     console.log("media");
@@ -122,21 +124,21 @@ app.controller("myCtrl", function($scope) {
     console.log(government);
     
     var trace1 = {
-      x: [0, 1, 2, 3, 4],
+      x: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'],
       y: [population.anger, population.disgust, population.fear, population.joy, population.sadness],
       name: 'Public',
       type: 'bar'
     };
 
     var trace2 = {
-      x: [0, 1, 2, 3, 4],
+      x: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'],
       y: [media.anger, media.disgust, media.fear, media.joy, media.sadness],
       name: 'Media',
       type: 'bar'
     };
 
     var trace3 = {
-      x: [0, 1, 2, 3, 4],
+      x: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'],
       y: [government.anger, government.disgust, government.fear, government.joy, government.sadness],
       name: 'Government',
       type: 'bar'
