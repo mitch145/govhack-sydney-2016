@@ -56,7 +56,8 @@ app.controller("myCtrl", function($scope) {
       key: newPostKey,
       name: name,
       population: emotions.population,
-      media: emotions.media
+      media: emotions.media,
+      government: emotions.government
     };
     console.log(postData);
 
@@ -74,11 +75,7 @@ app.controller("myCtrl", function($scope) {
 
     // Clear form input 
     $scope.newTopic = '';
-    $scope.anger = '';
-    $scope.disgust = '';
-    $scope.fear = '';
-    $scope.joy = '';
-    $scope.sadness = '';
+    $scope.emotions = '';
 
     return;
   };
@@ -116,27 +113,51 @@ app.controller("myCtrl", function($scope) {
 
 
 
-  $scope.togglePlot = function(name, public, media){
+  $scope.togglePlot = function(name, population, media, government){
+    console.log("population");
+    console.log(population);
+    console.log("media");
+    console.log(media);
+    console.log("government");
+    console.log(government);
+    
+    var trace1 = {
+      x: [0, 1, 2, 3, 4],
+      y: [population.anger, population.disgust, population.fear, population.joy, population.sadness],
+      name: 'Public',
+      type: 'bar'
+    };
+
+    var trace2 = {
+      x: [0, 1, 2, 3, 4],
+      y: [media.anger, media.disgust, media.fear, media.joy, media.sadness],
+      name: 'Media',
+      type: 'bar'
+    };
+
+    var trace3 = {
+      x: [0, 1, 2, 3, 4],
+      y: [government.anger, government.disgust, government.fear, government.joy, government.sadness],
+      name: 'Government',
+      type: 'bar'
+    };
+
+    var data = [trace1, trace2, trace3];
+
+    var layout = {
+      barmode: 'stack',            
+    };
+
+
+
+        
+    Plotly.newPlot(name, data, layout);
 
     if($("#"+name).is(":hidden")){
       $("#"+name).slideDown( "fast", function(){});
     } else {
       $("#"+name).slideUp("fast", function(){});
     }
-    
-    var data = [{
-      x: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'],
-      y: [anger, disgust, fear, joy, sadness],
-      type: 'bar'
-    }];
-
-    var layout = {
-      autosize: false,
-      width: 450,
-      height: 450
-    };
-
-    Plotly.newPlot(name, data, layout);
 
   };
 
