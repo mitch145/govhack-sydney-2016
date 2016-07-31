@@ -2,13 +2,15 @@ var app = angular.module("MyTopicList", []);
 app.controller("myCtrl", function($scope) {
 
   $scope.searchTopics = '';
-  $scope.started = false;
+  $scope.started = true;
+  $scope.admin = false;
   $scope.test = "testing";
 
   $scope.start = function(scope){
     initPlots($scope);
     $scope.started = true;
   };
+
 
   initPlots = function($scope){
     console.log($scope.topics);
@@ -44,7 +46,8 @@ app.controller("myCtrl", function($scope) {
   
 
 
-  function writeNewTopic(name, anger, disgust, fear, joy, sadness) {
+  function writeNewTopic(name, emotions) {
+    console.log(emotions);
 
     // Get a key for a new Post.
     var newPostKey = database.ref().child('posts').push().key;
@@ -53,13 +56,8 @@ app.controller("myCtrl", function($scope) {
     var postData = {
       key: newPostKey,
       name: name,
-      sentiment: {
-        anger: anger,
-        disgust: disgust,
-        fear: fear,
-        joy: joy,
-        sadness: sadness
-      }
+      population: emotions.population,
+      media: emotions.media
     };
 
     // Write the new post's data
@@ -72,7 +70,7 @@ app.controller("myCtrl", function($scope) {
   $scope.addTopic = function addTopic($scope){
 
     // Send Topic to database
-    writeNewTopic($scope.newTopic, $scope.anger, $scope.disgust, $scope.fear, $scope.joy, $scope.sadness);
+    writeNewTopic($scope.newTopic, $scope.emotions);
 
     // Clear form input 
     $scope.newTopic = '';
