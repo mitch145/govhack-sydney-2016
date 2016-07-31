@@ -13,7 +13,6 @@ app.controller("myCtrl", function($scope) {
 
 
   initPlots = function($scope){
-    console.log($scope.topics);
     for(i = 0; i < $scope.topics.length; i++){
       name = $scope.topics[i].name;
       name = "#"+name;
@@ -59,6 +58,7 @@ app.controller("myCtrl", function($scope) {
       population: emotions.population,
       media: emotions.media
     };
+    console.log(postData);
 
     // Write the new post's data
     var updates = {};
@@ -116,7 +116,7 @@ app.controller("myCtrl", function($scope) {
 
 
 
-  $scope.togglePlot = function(name, anger, disgust, fear, joy, sadness){
+  $scope.togglePlot = function(name, public, media){
 
     if($("#"+name).is(":hidden")){
       $("#"+name).slideDown( "fast", function(){});

@@ -154,7 +154,7 @@
 									</select>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-default center-block">Add Topic</button>
+							<button type="submit" class="btn btn-default center-block">Add Report</button>
 						</form>
 					</div>
 				</div>
@@ -167,14 +167,14 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6" ng-repeat="topic in topics | filter:searchTopics">
+			<div class="col-md-12" ng-repeat="topic in topics | filter:searchTopics">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 				    <h3 class="panel-title">{{topic.name}}</h3>
 				  </div>
 					<div class="panel-content">
 						
-						<button type="button" class="btn btn-default center-block" ng-click="togglePlot(topic.name, topic.sentiment.anger, topic.sentiment.disgust, topic.sentiment.fear, topic.sentiment.joy, topic.sentiment.sadness)">Show Report</button>
+						<button type="button" class="btn btn-default center-block" ng-click="togglePlot(topic.name, topic.public, topic.media)">Show Report</button>
 						<!-- <button type="button" class="btn btn-danger center-block" ng-click="removeTopic($scope, topic.key)">Remove Topic</button> -->
 						
 						<div class="portfolio-slide-down">
